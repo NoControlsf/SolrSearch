@@ -3,6 +3,7 @@ package com.solrsearch.dao;
 import com.solrsearch.bean.Jsgs;
 import com.solrsearch.service.MyService;
 import com.solrsearch.util.SolrjTest;
+import org.apache.commons.lang.StringUtils;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.springframework.stereotype.Repository;
@@ -30,6 +31,39 @@ public class MyDao implements MyService {
             solrQuery.setRows(rows);
             QueryResponse queryResponse = solrtest.getHttpSolrClient().query(solrQuery);
             List<Jsgs> jsgss = queryResponse.getBeans(Jsgs.class);
+            return jsgss;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Jsgs> searchHighLight(String solrKey, String solrValue) {
+        SolrjTest solrtest = new SolrjTest();
+        try {
+            solrtest.setUp();
+            String keywords = solrValue;
+            int page = 1;
+            int rows = 10;
+
+            SolrQuery solrQuery = new SolrQuery(); // 构造搜索条件
+            solrQuery.setQuery(solrKey + ":*" + keywords + "*"); // 搜索关键词
+            // 设置分页
+            solrQuery.setStart((Math.max(page, 1) - 1) * rows);
+            solrQuery.setRows(rows);
+            QueryResponse queryResponse = solrtest.getHttpSolrClient().query(solrQuery);
+            List<Jsgs> jsgss = queryResponse.getBeans(Jsgs.class);
+
+            for(Jsgs jsgs:jsgss){
+                if(keywords != null){
+                        if(!StringUtils.isEmpty(jsgs.getTaxpayer_name()))
+                            jsgs.setTaxpayer_name(jsgs.getTaxpayer_name().replace(keywords,"<font color='red'>"+keywords+"</font>"));
+                }
+            }
+
+
+
             return jsgss;
         } catch (Exception e) {
             e.printStackTrace();

@@ -18,7 +18,7 @@
     <%--<script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>--%>
     <!--[endif]-->
-    <script src="<%=request.getContextPath()%>/js/jquery-2.1.1.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/jquery-1.11.0.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/layer.js"></script>
     <title>index</title>
@@ -46,7 +46,7 @@
       </div>
     </div>
       <div class="row">
-        <input class="col-xs-6 col-xs-offset-1" id="EntName" style="left:2.5%;top: 235px;height: 40px;width: 600px" onpaste="return false" AUTOCOMPLETE="off"  name="EntName" >
+        <input class="col-xs-6 col-xs-offset-1" id="Keyword" style="left:2.5%;top: 235px;height: 40px;width: 600px" onpaste="return false" AUTOCOMPLETE="off"  name="Keyword" >
         <div id='scztDiv' style="position:absolute;left:16.7%;top:385px;display:none;z-index:999999;">
           <select id='scztSelect' size="8" style='margin-top:0px;'>
           </select>

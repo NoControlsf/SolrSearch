@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface MyService {
     public List<Jsgs> searchByKey(String solrKey, String solrValue);
+    public List<Jsgs> searchHighLight(String solrKey, String solrValue);
 }

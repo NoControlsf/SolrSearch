@@ -2,20 +2,18 @@
  * Created by Administrator on 2017/6/14.
  */
 $(function() {
-    var fEntCode = "";
     var fName = "";
 
     //项目根路径
     var basePath = $("#txtRootPath").val();
-    $("#EntName").focus(function (e){
+    $("#Keyword").focus(function (e){
         queryEnterprises();
     });
-    $("#EntName").keyup(function (e){
-        fEntCode = "";
+    $("#Keyword").keyup(function (e){
         fName = "";
         queryEnterprises();
     });
-    $("#EntName").blur(function (e){
+    $("#Keyword").blur(function (e){
         $("#scztDiv").slideUp('slow');
     });
     $("#scztSelect").click(function (e){
@@ -23,12 +21,12 @@ $(function() {
         var index=myselect.selectedIndex ;
         fEntCode = myselect.options[index].value;
         fName =myselect.options[index].text;
-        $("#EntName").val(fName);
+        $("#Keyword").val(fName);
         $("#scztDiv").slideUp('slow');
     });
 
     $("#commitName").click(function () {
-        var sc = $("#EntName").val();
+        var sc = $("#Keyword").val();
         var content="";
         $.ajax({
             url:basePath + "/EntSearchEngine/getEntList"
@@ -55,13 +53,13 @@ $(function() {
 function queryEnterprises() {
     var basePath = $("#txtRootPath").val();
     var content="";
-    var  sc= $("#EntName").val();
+    var  sc= $("#Keyword").val();
     //清空之前的模糊匹配信息
     document.getElementById("scztSelect").options.length=0;
     //显示div  设置显示的高度
     // $("#scztDiv").css("display","block");
-    $("#scztDiv").slideDown("slow");
-    var scztWidth = $('#EntName').width();
+    $("#scztDiv").slideDown();
+    var scztWidth = $('#Keyword').width();
     $("#scztSelect").css("width",scztWidth);
     //ajax 开始
     $.ajax({
@@ -69,16 +67,21 @@ function queryEnterprises() {
             dataType: "JSON",
             url: basePath +"/EntSearchEngine/EnterpriseInfo",
             //参数
-            data: {sc:sc},
+            data: {
+                solrkey: 'taxpayer_name',
+                solrvalue: sc
+            },
             success: function(data){
                 //遍历返回的JsonArray
                 /*console.log(data.rows);*/
-                var temp = data.rows;
-                $.each(temp,function(index,temp){
-                    content += "<option value="+temp['FID']+">"+temp['FENTNAME']+"</option>";
-                });
-                //动态将option 写入select
-                document.getElementById("scztSelect").innerHTML=content;
+                if(data != null){
+                    var temp = data;
+                    $.each(temp,function(index,temp){
+                        content += "<option>"+temp['taxpayer_name']+"</option>";
+                    });
+                    //动态将option 写入select
+                    document.getElementById("scztSelect").innerHTML=content;
+                }
             }
         }
     );
