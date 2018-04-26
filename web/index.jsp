@@ -46,7 +46,7 @@
       </div>
     </div>
       <div class="row">
-        <input class="col-xs-6 col-xs-offset-1" id="Keyword" style="left:2.5%;top: 235px;height: 40px;width: 600px" onpaste="return false" AUTOCOMPLETE="off"  name="Keyword" >
+        <input class="col-xs-6 col-xs-offset-1" id="Keyword" style="left:2.5%;top: 235px;height: 40px;" onpaste="return false" AUTOCOMPLETE="off"  name="Keyword" >
         <div id='scztDiv' style="position:absolute;left:16.7%;top:385px;display:none;z-index:999999;">
           <select id='scztSelect' size="8" style='margin-top:0px;'>
           </select>

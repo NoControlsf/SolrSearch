@@ -3,9 +3,10 @@
  */
 $(function() {
     var fName = "";
-    start()
-
-
+    if($("#start_solrvalue").val() != 'null'){
+        $("#Keyword").val($("#start_solrvalue").val());
+        start()
+    }
 
     //项目根路径
     //var basePath = $("#txtRootPath").val();
@@ -92,9 +93,9 @@ function start() {
             if(data != null){
                 var temp = data;
                 $.each(temp,function(index,temp){
-                    content += "<li class='col-xs-10' style='list-style-type:none; padding-bottom: 20px'><div class='row'><a href='./views/enterpriseInfo.jsp?FID="+temp['id']+"'>"+temp['taxpayer_name']+"</a></div>"+
-                        "<div class='row'><div class='col-xs-5'>法人："+temp['legal_representative']+"</div><div class='col-xs-5'>案件性质："+temp['case_nature']+"</div></div>"+
-                        "<div class='row'><div class='col-xs-5'> 发布时间："+temp['bt_time']+"</div></div></li>";
+                    content += "<li class='col-xs-12' style='list-style-type:none; padding-bottom: 20px'><div class='row'><div class='col-xs-10'><h4><a href='caseInfo.jsp?FID="+temp['id']+"'>"+temp['taxpayer_name']+"</a></h4></div></div>"+
+                        "<div class='row'><div class='col-xs-5'>法人："+temp['legal_representative']+"</div><div class='col-xs-5 col-xs-offset-2'> 发布时间："+temp['bt_time']+"</div></div>"+
+                        "<div class='row'><div class='col-xs-10'>案件性质："+temp['case_nature']+"</div></div></li>";
                 });
                 //动态将li 写入ul
                 document.getElementById("searchList").innerHTML=content;

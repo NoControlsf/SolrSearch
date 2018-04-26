@@ -31,6 +31,7 @@
 <body>
 <%--系统根目录--%>
 <input id="txtRootPath" type="hidden" value="<%=request.getContextPath()%>"/>
+<input id="start_solrvalue" type="hidden" value="<%=request.getParameter("solrvalue")%>">
 <div style="height: 150px;background-color: #007d73" id="search">
     <div class="container">
         <div class="row">
@@ -47,7 +48,7 @@
             </div>
         </div>
         <div class="row">
-            <input class="col-xs-6 col-xs-offset-1" id="Keyword" style="left:2.5%;top: 40px;height: 40px;width: 600px" value="<%=request.getParameter("solrvalue")%>" onpaste="return false" AUTOCOMPLETE="off" name="Keyword" >
+            <input class="col-xs-6 col-xs-offset-1" id="Keyword" style="left:2.5%;top: 40px;height: 40px;"  onpaste="return false" AUTOCOMPLETE="off" name="Keyword" >
             <div id='scztDiv' style="position:absolute;left:16.4%;top:122px;display:none;z-index:999999;">
                 <select id='scztSelect' size="10" style='margin-top:0px;'>
                 </select>
