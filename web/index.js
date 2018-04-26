@@ -4,6 +4,8 @@
 $(function() {
     var fName = "";
 
+
+
     //项目根路径
     var basePath = $("#txtRootPath").val();
     $("#Keyword").focus(function (e){
@@ -26,27 +28,9 @@ $(function() {
     });
 
     $("#commitName").click(function () {
-        var sc = $("#Keyword").val();
-        var content="";
-        $.ajax({
-            url:basePath + "/EntSearchEngine/getEntList"
-            ,method:"post"
-            ,contentType:"application/x-www-form-urlencoded"
-            //参数
-            ,data: {sc:sc}
-            ,success: function(data) {
-                //遍历返回的JsonArray
-                console.log(data.rows);
-                var temp = data.rows;
-                $.each(temp,function(index,temp){
-                    content += "<li class='col-xs-10' style='list-style-type:none; padding-bottom: 20px'><div class='row'><a href='./views/enterpriseInfo.jsp?FID="+temp['FID']+"'>"+temp['FENTNAME']+"</a></div>"+
-                                "<div class='row'><div class='col-xs-5'>法人："+temp['FLEGALPERSONNAME']+"</div><div class='col-xs-5'>状态："+temp['FREGSTATUS']+"</div></div>"+
-                                "<div class='row'><div class='col-xs-5'> 建立时间："+temp['FESTIBLISHTIME']+"</div><div class='col-xs-5'>注册资本："+temp['FREGCAPITAL']+"</div></div></li>";
-                });
-                //动态将li 写入ul
-                document.getElementById("searchList").innerHTML=content;
-            }
-        });
+        var solrvalue = $("#Keyword").val();
+        var solrkey = 'taxpayer_name';
+        location.href="homepage.jsp?solrkey=" + solrkey + "&solrvalue=" + solrvalue
     });
 });
 

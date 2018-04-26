@@ -32,7 +32,11 @@ public class MyController {
     public List<Jsgs> SearchList(HttpServletRequest request){
         String solrkey = request.getParameter("solrkey");
         String solrvalue = request.getParameter("solrvalue");
-        List<Jsgs> result = myService.searchHighLight(solrkey, solrvalue);
-        return result;
+        if(solrvalue != "") {
+            List<Jsgs> result = myService.searchHighLight(solrkey, solrvalue);
+            return result;
+        }else {
+            return null;
+        }
     }
 }
