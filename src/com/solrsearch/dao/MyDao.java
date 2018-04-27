@@ -70,4 +70,22 @@ public class MyDao implements MyService {
         }
         return null;
     }
+
+    @Override
+    public Jsgs searchEntInfo(String solrKey, String solrValue) {
+        SolrjTest solrtest = new SolrjTest();
+        try {
+            solrtest.setUp();
+            String keywords = solrValue;
+
+            SolrQuery solrQuery = new SolrQuery(); // 构造搜索条件
+            solrQuery.setQuery(solrKey + ":*" + keywords + "*"); // 搜索关键词
+            QueryResponse queryResponse = solrtest.getHttpSolrClient().query(solrQuery);
+            List<Jsgs> jsgss = queryResponse.getBeans(Jsgs.class);
+            return jsgss.get(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

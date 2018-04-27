@@ -27,6 +27,13 @@
     <script src="<%=request.getContextPath()%>/js/layer.js"></script>
 --%>
     <title>homepage</title>
+    <style type="text/css">
+        .case_one{
+            background-color: gainsboro;
+            position:absolute;
+            box-shadow:0px 8px 16px 0px;
+        }
+    </style>
 </head>
 <body>
 <%--系统根目录--%>
@@ -60,8 +67,8 @@
     </div>
 </div>
 <div id="search_by_key">
-    <div class="container">
-        <div class="row col-xs-offset-1">
+    <div class="container col-xs-8 col-xs-offset-1" style="left:6%;margin-bottom:10px;">
+        <div class="row">
             查找范围：<span>&nbsp;&nbsp;<a href="#">企业名</a></span>
             <span>&nbsp;&nbsp;<a href="#">法人/股东</a></span>
             <span>&nbsp;&nbsp;<a href="#">高管</a></span>
@@ -69,10 +76,10 @@
             <span>&nbsp;&nbsp;<a href="#">联系方式</a></span>
             <span>&nbsp;&nbsp;<a href="#">经营范围</a></span>
         </div>
-        <div class="row col-xs-offset-1">
+        <div class="row">
             企业状态：
         </div>
-        <div class="row col-xs-offset-1">
+        <div class="row">
             注册地址：<span>&nbsp;&nbsp;<a href="#">南京</a></span>
             <span>&nbsp;&nbsp;<a href="#">无锡</a></span>
             <span>&nbsp;&nbsp;<a href="#">徐州</a></span>
@@ -89,21 +96,22 @@
             <span>&nbsp;&nbsp;<a href="#">张家港保税区</a></span>
             <span>&nbsp;&nbsp;<a href="#">苏州工业园区</a></span>
         </div>
-        <div class="row col-xs-offset-1">
+        <div class="row">
             发布日期：<span>&nbsp;&nbsp;<a href="#">2018</a></span>
             <span>&nbsp;&nbsp;<a href="#">2017</a></span>
             <span>&nbsp;&nbsp;<a href="#">2016</a></span>
         </div>
-        <div class="row col-xs-offset-1">
+        <div class="row">
             行业门类：
         </div>
     </div>
 </div>
+
 <div id="search_result">
     <div class="container">
         <div class="col-xs-offset-1">
-            <ul id="searchList">
-            </ul>
+            <div id="searchList">
+            </div>
         </div>
     </div>
 </div>

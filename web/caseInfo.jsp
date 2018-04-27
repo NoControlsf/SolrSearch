@@ -22,53 +22,73 @@
     <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/layer.js"></script>
     <title>caseInfo</title>
+    <script charset="utf-8" type="text/javascript" language="javascript" src="caseInfo.js"></script>
+    <style type="text/css">
+        table{
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        tr{
+            height: 50px;
+        }
+        td {
+            padding: .5em .5em;
+            border-bottom: solid 1px #ccc;
+        }
+        .foldtl { position: relative; -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.8); -moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.8); box-shadow: 5px 5px 5px rgba(0,0,0,0.8); }
+        .foldtl:before { content: ""; position: absolute; top: 0%; left: 0%; width: 0px; height: 0px; border-bottom: 70px solid #eee; border-left: 70px solid transparent; -webkit-box-shadow: 7px 7px 7px rgba(0,0,0,0.3); -moz-box-shadow: 7px 7px 7px rgba(0,0,0,0.3); box-shadow: 7px 7px 7px rgba(0,0,0,0.3); }
+        .foldtl:after { content: ""; position: absolute; top: 0%; left: 0%; width: 0px; height: 0px; border-top: 69px solid #272822; border-right: 69px solid transparent; }
+    </style>
 </head>
-<body>
-<div class="container">
+<body style="background-color: #272822">
+<%--系统根目录--%>
+<input id="txtRootPath" type="hidden" value="<%=request.getContextPath()%>"/>
+<input id="start_fid" type="hidden" value="<%=request.getParameter("FID")%>">
+<div class="container col-xs-offset-2 col-xs-8 foldtl" style="background-color: white; margin-top: 100px;margin-bottom: 100px">
     <div class="row">
-        <h2>重大税收违法案件信息</h2>
+        <h2 class="col-xs-offset-4">重大税收违法案件信息</h2>
     </div>
-    <div>
-        <table id="case_info" data-toggle="table">
+    <div style="padding-top: 30px">
+        <table id="case_info" class="col-xs-12">
             <tr>
-                <td width="230" align="center" bgcolor="#e6f4fc" class="blue12_24">纳税人名称</td>
-                <td align="center" bgcolor="#FFFFFF"><!--<$[纳税人名称]>begin-->无锡滨溪纺织有限公司<!--<$[纳税人名称]>end--></td>
+                <td class="col-xs-4" align="center" bgcolor="#e6f4fc">纳税人名称</td>
+                <td class="col-xs-8" align="center" bgcolor="#FFFFFF" id="taxpayer_name"></td>
             </tr>
             <tr>
-                <td align="center" bgcolor="#e6f4fc" class="blue12_24">纳税人识别号</td>
-                <td align="center" bgcolor="#FFFFFF"><!--<$[纳税人识别号]>begin-->91320211MA1MB2EW57<!--<$[纳税人识别号]>end--></td>
+                <td class="col-xs-4" align="center" bgcolor="#e6f4fc">纳税人识别号</td>
+                <td class="col-xs-8" align="center" bgcolor="#FFFFFF" id="id"></td>
             </tr>
             <tr>
-                <td align="center" bgcolor="#e6f4fc" class="blue12_24">组织机构代码</td>
-                <td align="center" bgcolor="#FFFFFF"><!--<$[组织机构代码]>begin-->MA1MB2EW5<!--<$[组织机构代码]>end--></td>
+                <td class="col-xs-4" align="center" bgcolor="#e6f4fc">组织机构代码</td>
+                <td class="col-xs-8" align="center" bgcolor="#FFFFFF" id="organization_code"></td>
             </tr>
             <tr>
-                <td align="center" bgcolor="#e6f4fc" class="blue12_24">注册地址</td>
-                <td align="center" bgcolor="#FFFFFF"><!--<$[注册地址]>begin-->江苏省无锡市滨湖区周新苑280<!--<$[注册地址]>end--></td>
+                <td class="col-xs-4" align="center" bgcolor="#e6f4fc">注册地址</td>
+                <td class="col-xs-8" align="center" bgcolor="#FFFFFF" id="registered_address"></td>
             </tr>
             <tr>
-                <td align="center" bgcolor="#e6f4fc" class="blue12_24">法定代表人或者负责人姓名、性别、证件名称及号码</td>
-                <td align="center" bgcolor="#FFFFFF"><!--<$[法定代表人或者负责人姓名]>begin-->徐加家<!--<$[法定代表人或者负责人姓名]>end-->、男、<!--<$[法定代表人或者负责人证件名称]>begin-->身份证<!--<$[法定代表人或者负责人证件名称]>end-->：<!--<$[法定代表人或者负责人证件号码]>begin-->513021********0332<!--<$[法定代表人或者负责人证件号码]>end--></td>
+                <td class="col-xs-4" align="center" bgcolor="#e6f4fc">法定代表人或者负责人姓名、性别、证件名称及号码</td>
+                <td class="col-xs-8" align="center" bgcolor="#FFFFFF" id="legal_representative"></td>
             </tr>
             <tr>
-                <td align="center" bgcolor="#e6f4fc" class="blue12_24">负有直接责任的财务负责人姓名、性别、证件名称及号码</td>
-                <td align="center" bgcolor="#FFFFFF"><!--<$[负有直接责任的财务负责人信息]>begin--><!--<$[负有直接责任的财务负责人信息]>end--></td>
+                <td class="col-xs-4" align="center" bgcolor="#e6f4fc">负有直接责任的财务负责人姓名、性别、证件名称及号码</td>
+                <td class="col-xs-8" align="center" bgcolor="#FFFFFF" id="financial_officer"></td>
             </tr>
             <tr>
-                <td align="center" bgcolor="#e6f4fc" class="blue12_24">负有直接责任的中介机构信息及其从业人员信息</td>
-                <td align="center" bgcolor="#FFFFFF"><!--<$[负有直接责任的中介机构信息]>begin--><!--<$[负有直接责任的中介机构信息]>end--></td>
+                <td class="col-xs-4" align="center" bgcolor="#e6f4fc">负有直接责任的中介机构信息及其从业人员信息</td>
+                <td class="col-xs-8"align="center" bgcolor="#FFFFFF" id="agency"></td>
             </tr>
             <tr>
-                <td align="center" bgcolor="#e6f4fc" class="blue12_24">案件性质</td>
-                <td align="center" bgcolor="#FFFFFF">虚开增值税专用发票或者虚开用于骗取出口退税、抵扣税款的其他发票</td>
+                <td class="col-xs-4" align="center" bgcolor="#e6f4fc">案件性质</td>
+                <td class="col-xs-8" align="center" bgcolor="#FFFFFF" id="case_nature"></td>
             </tr>
             <tr>
-                <td align="center" bgcolor="#e6f4fc" class="blue12_24">主要违法事实</td>
-                <td align="center" bgcolor="#FFFFFF">    经江苏省无锡市国家税务局稽查局检查，发现其在2017年4月10日至2017年7月31日期间，主要存在以下问题：对外虚开增值税销项发票111份，金额936.69万元，税额159.24万元。</td>
+                <td class="col-xs-4" align="center" bgcolor="#e6f4fc">主要违法事实</td>
+                <td class="col-xs-8" align="center" bgcolor="#FFFFFF" id="illegal_facts"></td>
             </tr>
             <tr>
-                <td align="center" bgcolor="#e6f4fc" class="blue12_24">相关法律依据及税务处理处罚情况</td>
-                <td align="center" bgcolor="#FFFFFF">依照《中华人民共和国税收征收管理法》等相关法律法规的有关规定，依法移送司法机关。</td>
+                <td class="col-xs-4" align="center" bgcolor="#e6f4fc">相关法律依据及税务处理处罚情况</td>
+                <td class="col-xs-8" align="center" bgcolor="#FFFFFF" id="punishment_situation"></td>
             </tr>
         </table>
     </div>

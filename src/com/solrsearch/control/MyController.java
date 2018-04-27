@@ -18,6 +18,7 @@ public class MyController {
     @Resource
     MyService myService;
 
+    //下拉列表
     @RequestMapping(value = "/EnterpriseInfo", method = RequestMethod.POST)
     @ResponseBody
     public List<Jsgs> SearchByKeyword(HttpServletRequest request){
@@ -27,6 +28,7 @@ public class MyController {
         return result;
     }
 
+    //查询列表
     @RequestMapping(value = "/getEntList", method = RequestMethod.POST)
     @ResponseBody
     public List<Jsgs> SearchList(HttpServletRequest request){
@@ -39,4 +41,15 @@ public class MyController {
             return null;
         }
     }
+
+    //详细信息
+    @RequestMapping(value = "/getEntInfo", method = RequestMethod.POST)
+    @ResponseBody
+    public Jsgs getEntInfo(HttpServletRequest request){
+        String solrkey = request.getParameter("solrkey");
+        String solrvalue = request.getParameter("solrvalue");
+        Jsgs result = myService.searchEntInfo(solrkey, solrvalue);
+        return result;
+    }
+
 }
